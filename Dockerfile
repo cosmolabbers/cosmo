@@ -4,13 +4,10 @@
 ############################################################
 
 # Set the base image to Ubuntu
-FROM ubuntu
+FROM ubuntu:14.04
 
 # File Author / Maintainer
-MAINTAINER Cosmolabbers
-
-# Add the application resources URL
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ raring main universe" >> /etc/apt/sources.list
+MAINTAINER cosmolabbers
 
 # Update the sources list
 RUN apt-get update
@@ -19,7 +16,7 @@ RUN apt-get update
 RUN apt-get install -y tar git curl nano wget dialog net-tools build-essential
 
 # Install Python and Basic Python Tools
-RUN apt-get install -y python python-dev python-distribute python-pip
+RUN apt-get install -y python python-dev python-distribute python-pip python-setuptools
 
 # Copy the application folder inside the container
 ADD /cosmo /cosmo
@@ -28,7 +25,7 @@ ADD /cosmo /cosmo
 RUN pip install -e /cosmo/
 
 # Expose ports
-EXPOSE 80
+EXPOSE 5555
 
 # Set the default directory where CMD will execute
 WORKDIR /cosmo
