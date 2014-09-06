@@ -1,0 +1,11 @@
+"/var/log/cosmo/*.log" {
+    daily
+    missingok
+    rotate 7
+    compress
+    delaycompress
+    notifempty
+    postrotate
+        touch /var/run/cosmo/uwsgi_logreopen
+    endscript
+}
